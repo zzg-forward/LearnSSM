@@ -1,5 +1,9 @@
-# Compiled class file
+ompiled class file
 *.class
+
+.idea/
+记录.txt
+target/
 
 # Log file
 *.log
