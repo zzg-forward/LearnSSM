@@ -22,19 +22,18 @@ public class ImageUtil {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
     private static final Random r = new Random();
 
-    public static void generateThumbnail(CommonsMultipartFile thumbnail, String targetAddr){
+    public static String generateThumbnail(File thumbnail, String targetAddr){
         String realFileName = getRandomFileName();  //随机文件名
         String extension = getFileExtension(thumbnail);  //文件扩展名
         makeDirPath(targetAddr);  //创建文件夹
         String relativeAddr = targetAddr + realFileName + extension;
         File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
         try {
-            Thumbnails.of(thumbnail.getInputStream()).size(200, 200)
-            .watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/watermark.jpg")), 0.25f)
-            .outputQuality(0.8f).toFile(dest);
+            Thumbnails.of(thumbnail).size(200, 200).outputQuality(0.25f).toFile(dest);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return relativeAddr;
     }
 
     /**
@@ -52,8 +51,8 @@ public class ImageUtil {
      * @param cFile
      * @return
      */
-    private static String getFileExtension(CommonsMultipartFile cFile){
-        String originalFileName = cFile.getOriginalFilename();
+    private static String getFileExtension(File cFile){
+        String originalFileName = cFile.getName();
         return originalFileName.substring(originalFileName.lastIndexOf("."));
     }
 

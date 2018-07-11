@@ -5,7 +5,9 @@ public enum ShopStateEnum {
     OFFLINE(-1, "非法店铺"),
     SUCCESS(1, "操作成功"),
     PASS(2, "通过认证"),
-    INNER_ERROR(-1001, "内部系统错误");
+    INNER_ERROR(-1001, "内部系统错误"),
+    NULL_SHOP(-1003, "shop信息为空"),
+    NULL_SHOPID(-1002, "shopId为空");
 
     private int state;
     private String stateInfo;
